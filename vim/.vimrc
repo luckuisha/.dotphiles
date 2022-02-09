@@ -52,6 +52,9 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 " extra column for linting
 set signcolumn=yes
 
+" scroll vim but not cursor
+set mouse=a
+
 " vim plug plugin manager
 call plug#begin('~/.vim/plugged')
 Plug 'gruvbox-community/gruvbox'

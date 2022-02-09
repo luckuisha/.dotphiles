@@ -3,7 +3,7 @@
 
 uses stow. simply stow the file within this repo to link the dotphile to the home directory
 
-currently, only vim is configured
+currently, only vim and tmux is configured
 
 
 requires vim-plug to run the plugin
