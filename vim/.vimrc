@@ -1,6 +1,7 @@
+" DEEELLLEEET THJS
+au BufRead,BufNewFile *.g4 set filetype=antlr4
 " default vim changes
 " :help setting for docs
-
 
 " syntax
 syntax on
@@ -25,6 +26,9 @@ set incsearch
 " keep buffer in background
 set hidden
 
+" highlights current line
+set cursorline
+
 " errorsound
 set noerrorbells
 
@@ -40,7 +44,7 @@ set undodir=~/.vim/undodir
 set undofile
 
 " scrolling
-set scrolloff=8
+set scrolloff=7
 
 " auto complete?
 set completeopt=menuone,noinsert,noselect
@@ -55,17 +59,83 @@ set signcolumn=yes
 " scroll vim but not cursor
 set mouse=a
 
+" term colors
+set t_Co=256
+set t_ut=
+
+" copy and paste from other programs
+set clipboard=unnamedplus
+
+" splits
+set splitbelow splitright
+
 " vim plug plugin manager
 call plug#begin('~/.vim/plugged')
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
 
-Plug 'gruvbox-community/gruvbox'
+    Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-fugitive'
+
+    Plug 'gruvbox-community/gruvbox'
 call plug#end()
+
+
+let mapleader = " "
+
+" fuzzy finder remapping
+nnoremap <C-p> :Files<Cr>
+nnoremap <leader>ps :Rg<Cr>
+
+" moving text without copying
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+inoremap <C-j> <esc>:m .+1<CR>==
+inoremap <C-k> <esc>:m .-2<CR>==
+nnoremap <leader>k :m .-2<CR>==
+nnoremap <leader>j :m .+2<CR>==
+
+" Remap splits navigation to just CTRL + hjkl
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Make adjusing split sizes a bit more friendly
+noremap <silent> <C-Left> :vertical resize +3<CR>
+noremap <silent> <C-Right> :vertical resize -3<CR>
+noremap <silent> <C-Up> :resize +3<CR>
+noremap <silent> <C-Down> :resize -3<CR>
+
+" yank to behave normally
+nnoremap Y y$
+
+" undo breakpoints on punctuations
+inoremap , ,<c-g>u
+inoremap . .<c-g>u
+inoremap ! !<c-g>u
+inoremap ? ?<c-g>u
+
+fun! Coloring() abort
+    " change linehighlight to something less dramatic
+    hi CursorLine cterm=NONE ctermbg=234 ctermfg=NONE
+endfunction
+
+augroup Color
+    autocmd!
+    autocmd ColorScheme * call Coloring()
+augroup END
 
 colorscheme gruvbox
 
-nnoremap <C-p> :Files<Cr>
+fun! TrimWhitespace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfun
 
-set t_ut=
+augroup UNLUCKY
+    autocmd!
+    autocmd BufWritePre * :call TrimWhitespace()
+augroup END
 
