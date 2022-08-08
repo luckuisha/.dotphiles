@@ -1,5 +1,3 @@
-" DEEELLLEEET THJS
-au BufRead,BufNewFile *.g4 set filetype=antlr4
 " default vim changes
 " :help setting for docs
 
@@ -14,6 +12,9 @@ set smartindent
 
 " set custom .vimrc files in proj directory
 set exrc
+
+" backspace fix
+set backspace=indent,eol,start
 
 " navbar and line number
 set relativenumber
