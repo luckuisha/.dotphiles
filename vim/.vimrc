@@ -60,14 +60,19 @@ set signcolumn=yes
 set mouse=a
 
 " term colors
-set t_Co=256
-set t_ut=
+"set t_Co=256
+set t_ut=""
+highlight Normal ctermfg=black ctermbg=lightgrey
 
 " copy and paste from other programs
 set clipboard=unnamedplus
 
 " splits
 set splitbelow splitright
+
+" remove sound
+set visualbell
+set t_vb=
 
 " vim plug plugin manager
 call plug#begin('~/.vim/plugged')
@@ -139,3 +144,6 @@ augroup UNLUCKY
     autocmd BufWritePre * :call TrimWhitespace()
 augroup END
 
+if (&term =~ '^xterm' && &t_Co == 256)
+    set t_ut= | set ttyscroll=1
+endif
