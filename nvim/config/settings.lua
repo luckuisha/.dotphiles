@@ -33,3 +33,5 @@ vim.opt.undofile = true
 -- Enable relative line numbers
 vim.o.relativenumber = true
 
+-- copy clipboard
+set clipboard+=unnamedplus
