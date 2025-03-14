@@ -9,3 +9,13 @@ currently, only vim and tmux is configured
 requires vim-plug to run the plugin
 also create ~/.vim/udodir
 mkdir ~/.vim/undodir -p
+
+
+## nvim ##
+uses lazy nvim
+
+## zsh ##
+uses powerlevel10k
+requires font
+zinit plugin manager
+  fzf
