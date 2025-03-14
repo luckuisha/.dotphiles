@@ -33,8 +33,8 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # vim bindings
 bindkey -v
-bindkey '^N' histor-search-backward
-bindkey '^n' histor-search-forward
+bindkey '^N' history-search-backward
+bindkey '^n' history-search-forward
 
 # Enable infinite history
 HISTSIZE=100000
