@@ -34,4 +34,4 @@ vim.opt.undofile = true
 vim.o.relativenumber = true
 
 -- copy clipboard
-set clipboard+=unnamedplus
+vim.opt.clipboard:append("unnamedplus")
